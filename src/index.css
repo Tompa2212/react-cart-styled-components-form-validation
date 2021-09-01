@@ -1,13 +1,78 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap");
+
+:root {
+  --light-gray: hsl(0, 0%, 51%);
+  --dark-gray: hsl(0, 0%, 20%);
+  --orange: hsl(28, 87%, 62%);
+
+  --transition: all 0.3s ease;
+}
+
+*,
+*::after,
+*::before {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.container {
+  max-width: 110rem;
+  margin: 0 auto;
+}
+
+.btn {
+  font-family: inherit;
+  font-size: inherit;
+  color: #fff;
+  cursor: pointer;
+
+  background: var(--orange);
+
+  border: transparent;
+  border-radius: 1rem;
+
+  padding: 1.2rem 3rem;
+  margin-top: 3rem;
+
+  display: block;
+}
+
+.btn--right {
+  margin-left: auto;
+}
+
+/*typography*/
+h3 {
+  margin-bottom: 2rem;
+  color: hsla(0, 0%, 20%, 1);
+}
+
+/*end*/
+
+.d-flex {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 110rem) {
+  .container {
+    padding: 3rem;
+  }
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
