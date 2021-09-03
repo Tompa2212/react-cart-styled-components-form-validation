@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import data from "./data";
+import { useFetch } from "./useFetch";
+import { useForm } from "./useForm";
 
 const AppContext = React.createContext();
 
@@ -12,22 +14,68 @@ const cartInitialState = {
 const AppProvider = ({ children }) => {
   //state for form
 
-  const [purchase, setPurchase] = useState({
-    email: "",
-    phone: "",
-    full_name: "",
-    address: "",
-    city: "",
-    country: "",
-    postal_code: "",
-    save_info: false,
+  const {
+    handleSubmit,
+    handleChange,
+    data: purchase,
+    errors,
+  } = useForm({
+    validations: {
+      email: {
+        validEmail: {
+          value: true,
+          message: "Email not valid",
+        },
+      },
+      phone: {
+        pattern: {
+          value: "^[0-9]+$",
+          message: "Phone number can contain only numbers",
+        },
+        required: {
+          value: true,
+          message: "This field is required",
+        },
+      },
+      full_name: {
+        pattern: {
+          value: "^[A-Za-z ]*$",
+          message: "This field isn't allowed to contain special characters",
+        },
+        required: {
+          value: true,
+          message: "This field is required",
+        },
+      },
+      address: {
+        required: {
+          value: true,
+          message: "This field is required",
+        },
+      },
+      city: {
+        required: {
+          value: true,
+          message: "This field is required",
+        },
+      },
+      postal_code: {
+        required: {
+          value: true,
+          message: "This field is required",
+        },
+      },
+    },
+    onSubmit: () => alert("User submitted!"),
   });
 
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setPurchase({ ...purchase, [name]: value });
-  };
+  const countries = useFetch("https://restcountries.eu/rest/v2/all");
+
+  // const handleChange = (e) => {
+  //   const name = e.target.name;
+  //   const value = e.target.value;
+  //   setPurchase({ ...purchase, [name]: value });
+  // };
 
   //state for cart
 
@@ -86,7 +134,16 @@ const AppProvider = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{ purchase, setPurchase, handleChange, cart, increase, decrease }}
+      value={{
+        purchase,
+        handleChange,
+        handleSubmit,
+        errors,
+        cart,
+        increase,
+        decrease,
+        countries,
+      }}
     >
       {children}
     </AppContext.Provider>

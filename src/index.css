@@ -76,3 +76,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.form-control {
+  margin-bottom: 3rem;
+}
+
+.form-control .error {
+  font-size: 1.4rem;
+  color: rgb(207, 35, 35);
+}

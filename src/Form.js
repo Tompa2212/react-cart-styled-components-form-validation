@@ -6,10 +6,10 @@ import styled from "styled-components";
 import { useGlobalContext } from "./context";
 
 const Form = () => {
-  const { purchase, handleChange } = useGlobalContext();
+  const { data, handleSubmit, countries } = useGlobalContext();
 
   return (
-    <form className="checkout__form">
+    <form className="checkout__form" onSubmit={handleSubmit}>
       <div className="checkout__contact">
         <h3>Contact information</h3>
         <div className="form-control">
@@ -20,15 +20,15 @@ const Form = () => {
             placeholder="Enter your email..."
             name="email"
           />
-          <div className="form-control">
-            <label>Phone</label>
-            <TextInput
-              type="text"
-              icon={<FaPhoneAlt />}
-              placeholder="Enter your phone..."
-              name="phone"
-            />
-          </div>
+        </div>
+        <div className="form-control">
+          <label>Phone</label>
+          <TextInput
+            type="text"
+            icon={<FaPhoneAlt />}
+            placeholder="Enter your phone..."
+            name="phone"
+          />
         </div>
       </div>
       <div className="checkout__shipping">
@@ -63,7 +63,7 @@ const Form = () => {
         <div className="checkout__country">
           <div className="form-control">
             <label>Country</label>
-            <Select>
+            {/* <CustomSelect>
               <FaGlobeEurope />
               <select
                 name="country"
@@ -73,13 +73,15 @@ const Form = () => {
                 <option value="" disabled className="select-placeholder">
                   Select country...
                 </option>
-                <option value="Croatia">Croatia</option>
-                <option value="USA">USA</option>
+                {countries.map((country) => {
+                  const { name } = country;
+                  return <option value={name}>{name}</option>;
+                })}
               </select>
               <div className="arrow-cont">
                 <span className="arrow"></span>
               </div>
-            </Select>
+            </CustomSelect> */}
           </div>
           <div className="form-control">
             <label>Postal code</label>
@@ -92,13 +94,13 @@ const Form = () => {
           </div>
         </div>
         <div className="form-control d-flex">
-          <input
+          {/* <input
             type="checkbox"
             className="checkbox"
             name="save_info"
             checked={purchase.save_info}
             onChange={handleChange}
-          />
+          /> */}
           <label
             style={{
               display: "inline-block",
@@ -115,14 +117,14 @@ const Form = () => {
   );
 };
 
-const Select = styled.div`
+const CustomSelect = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   border: 1px solid var(--light-gray);
-  border-radius: 1rem;
-  padding: 1.1rem;
+  border-radius: 0.5rem;
+  padding: 0.88rem;
   font-size: inherit;
   color: var(--light-gray);
   cursor: pointer;
